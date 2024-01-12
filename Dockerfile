@@ -7,7 +7,9 @@ RUN apt update && apt install -y \
     libapache2-mod-php \
     php-mysql \
     mariadb-server \
-    vsftpd
+    vsftpd \
+    wget \
+    unzip
 
 # Ajouter l'utilisateur et créer son dossier web
 ARG USERNAME=user
@@ -16,8 +18,9 @@ RUN useradd -m $USERNAME
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Exposer le port 80
+# Exposer les ports
 EXPOSE 80
+EXPOSE 21
 
 # démarrer apache et mariadb et empêcher que le conteneur s'arrête
 CMD service apache2 start && service mariadb start && service vsftpd start && tail -f /dev/null

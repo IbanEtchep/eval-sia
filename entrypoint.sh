@@ -1,8 +1,18 @@
 #!/bin/bash
 
+# Dossier web utilisateur
 if [ ! -d "/var/www/html/Lascoumoune/$USERNAME" ]; then
     mkdir -p /var/www/html/Lascoumoune/$USERNAME
     chown -R $USERNAME:$USERNAME /var/www/html/Lascoumoune/$USERNAME
+fi
+
+
+# Télécharger et installer PHPMyAdmin
+if [ ! -d "/var/www/html/phpmyadmin" ]; then
+    wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip -O phpmyadmin.zip
+    unzip phpmyadmin.zip -d /var/www/html
+    mv /var/www/html/phpMyAdmin-*-all-languages /var/www/html/phpmyadmin
+    rm phpmyadmin.zip
 fi
 
 service apache2 start
