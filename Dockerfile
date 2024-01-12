@@ -11,10 +11,6 @@ RUN apt update && apt install -y \
     wget \
     unzip
 
-# Ajouter l'utilisateur et créer son dossier web
-ARG USERNAME=user
-RUN useradd -m $USERNAME
-
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

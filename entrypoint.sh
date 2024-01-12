@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#création de l'utilisateur
+useradd -m $USERNAME
+echo "$USERNAME:$PASSWORD" | chpasswd
+
 # Dossier web utilisateur
 if [ ! -d "/var/www/html/Lascoumoune/$USERNAME" ]; then
     mkdir -p /var/www/html/Lascoumoune/$USERNAME

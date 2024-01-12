@@ -4,8 +4,6 @@ services:
   lamp:
     build:
       context: .
-      args:
-        USERNAME: iban
     ports:
       - "8080:80"
       - "2121:21"
@@ -14,6 +12,7 @@ services:
       - db_data:/var/lib/mysql
     environment:
       - USERNAME=iban
+      - PASSWORD=iban
     restart: always
 
 volumes:
