@@ -9,6 +9,7 @@ services:
       - "2121:21"
     volumes:
       - ./www:/var/www/html
+      - ./home:/home
       - db_data:/var/lib/mysql
     environment:
       - USERNAME=iban

@@ -4,12 +4,15 @@
 useradd -m $USERNAME
 echo "$USERNAME:$PASSWORD" | chpasswd
 
-# Dossier web utilisateur
+# Créer le répertoire pour l'utilisateur si nécessaire
 if [ ! -d "/var/www/html/Lascoumoune/$USERNAME" ]; then
     mkdir -p /var/www/html/Lascoumoune/$USERNAME
     chown -R $USERNAME:$USERNAME /var/www/html/Lascoumoune/$USERNAME
 fi
 
+#lien symbolique depuis le home de l'utilisateur à son web
+ln -s /var/www/html/Lascoumoune/$USERNAME /home/$USERNAME/web
+chown -R $USERNAME:$USERNAME /home/$USERNAME/
 
 # Télécharger et installer PHPMyAdmin
 if [ ! -d "/var/www/html/phpmyadmin" ]; then
