@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  lamp:
+    build:
+      context: .
+      args:
+        USERNAME: iban
+    ports:
+      - "8080:80"
+      - "2121:21"
+    volumes:
+      - ./www:/var/www/html
+      - db_data:/var/lib/mysql
+    restart: always
+
+volumes:
+  db_data:
