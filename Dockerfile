@@ -11,12 +11,15 @@ RUN apt update && apt install -y \
 
 # Ajouter l'utilisateur et créer son dossier web
 ARG USERNAME=user
-RUN useradd -m $USERNAME \
-    && mkdir -p /var/www/html/Lascoumoune/$USERNAME \
-    && chown -R $USERNAME:$USERNAME /var/www/html/Lascoumoune/$USERNAME
+RUN useradd -m $USERNAME
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Exposer le port 80
 EXPOSE 80
 
 # démarrer apache et mariadb et empêcher que le conteneur s'arrête
 CMD service apache2 start && service mariadb start && service vsftpd start && tail -f /dev/null
+
+ENTRYPOINT ["/entrypoint.sh"]
